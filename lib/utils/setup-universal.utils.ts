@@ -10,56 +10,60 @@ const DEFAULT_CACHE_EXPIRATION_TIME = 60000; // 60 seconds
 const logger = new Logger('AngularUniversalModule');
 
 export function setupUniversal(app: any, ngOptions: AngularUniversalOptions) {
-  const cacheOptions = getCacheOptions(ngOptions);
+  try {
+    const cacheOptions = getCacheOptions(ngOptions);
 
-  app.engine('html', (_, options, callback) => {
-    let cacheKey;
-    if (cacheOptions.isEnabled) {
-      const cacheKeyGenerator = cacheOptions.keyGenerator;
-      cacheKey = cacheKeyGenerator.generateCacheKey(options.req);
-      const cacheHtml = cacheOptions.storage.get(cacheKey);
-      if (cacheHtml) {
-        return callback(null, cacheHtml);
+    app.engine('html', (_, options, callback) => {
+      let cacheKey;
+      if (cacheOptions.isEnabled) {
+        const cacheKeyGenerator = cacheOptions.keyGenerator;
+        cacheKey = cacheKeyGenerator.generateCacheKey(options.req);
+        const cacheHtml = cacheOptions.storage.get(cacheKey);
+        if (cacheHtml) {
+          return callback(null, cacheHtml);
+        }
       }
-    }
 
-    ngExpressEngine({
-      bootstrap: ngOptions.bootstrap,
-      inlineCriticalCss: ngOptions.inlineCriticalCss,
-      providers: [
-        {
-          provide: 'serverUrl',
-          useValue: `${options.req.protocol}://${options.req.get('host')}`
-        },
-        ...(ngOptions.extraProviders || [])
-      ]
-    })(_, options, (err, html) => {
-      if (err && ngOptions.errorHandler) {
-        return ngOptions.errorHandler({ err, html, renderCallback: callback });
-      }
+      ngExpressEngine({
+        bootstrap: ngOptions.bootstrap,
+        inlineCriticalCss: ngOptions.inlineCriticalCss,
+        providers: [
+          {
+            provide: 'serverUrl',
+            useValue: `${options.req.protocol}://${options.req.get('host')}`
+          },
+          ...(ngOptions.extraProviders || [])
+        ]
+      })(_, options, (err, html) => {
+        if (err && ngOptions.errorHandler) {
+          return ngOptions.errorHandler({ err, html, renderCallback: callback });
+        }
 
       if (err) {
         logger.error(err);
         return callback(err);
       }
 
-      if (cacheOptions.isEnabled && cacheKey) {
-        cacheOptions.storage.set(cacheKey, html, cacheOptions.expiresIn);
-      }
-      callback(null, html);
+        if (cacheOptions.isEnabled && cacheKey) {
+          cacheOptions.storage.set(cacheKey, html, cacheOptions.expiresIn);
+        }
+        callback(null, html);
+      });
     });
-  });
 
-  app.set('view engine', 'html');
-  app.set('views', ngOptions.viewsPath);
+    app.set('view engine', 'html');
+    app.set('views', ngOptions.viewsPath);
 
-  // Serve static files
-  app.get(
-    ngOptions.rootStaticPath,
-    express.static(ngOptions.viewsPath, {
-      maxAge: 600
-    })
-  );
+    // Serve static files
+    app.get(
+      ngOptions.rootStaticPath,
+      express.static(ngOptions.viewsPath, {
+        maxAge: 600
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
 }
 
 export function getCacheOptions(ngOptions: AngularUniversalOptions) {
