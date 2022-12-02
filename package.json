@@ -1,8 +1,8 @@
 {
-  "name": "@nestjs/ng-universal",
-  "version": "6.1.0",
-  "description": "Nest - modern, fast, powerful node.js web framework (@ng-universal)",
-  "author": "Kamil Mysliwiec",
+  "name": "@nestjs-contrib/ng-universal",
+  "version": "7.0.0",
+  "description": "Nest - modern, fast, powerful node.js web framework (@ng-universal) (community active fork)",
+  "author": "Joseph R. Quinn",
   "license": "MIT",
   "scripts": {
     "test:schematics": "jest --run-in-band --silent",
@@ -18,9 +18,9 @@
   "peerDependencies": {
     "@angular/common": "^14.0.0 || ^15.0.0",
     "@angular/platform-server": "^14.0.0 || ^15.0.0",
-    "@nestjs/common": "^9.0.0",
-    "@nestjs/core": "^9.0.0",
-    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/common": "^9.0.0 || ^10.0.0",
+    "@nestjs/core": "^9.0.0 || ^10.0.0",
+    "@nestjs/platform-express": "^9.0.0 || ^10.0.0",
     "@nguniversal/common": "^14.0.0 || ^15.0.0",
     "@nguniversal/express-engine": "^12.0.0 || ^13.0.0 || ^14.0.0",
     "express": "^4.17.1",
