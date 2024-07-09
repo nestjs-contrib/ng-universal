@@ -1,6 +1,6 @@
 {
   "name": "@nestjs-contrib/ng-universal",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Nest - modern, fast, powerful node.js web framework (@ng-universal)",
   "author": "Kamil Mysliwiec",
   "license": "MIT",
@@ -16,8 +16,8 @@
     "publish:next": "npm publish --access public --tag next"
   },
   "peerDependencies": {
-    "@angular/core": "^17.0.0 || ^18.0.0",
     "@angular/common": "^17.0.0 || ^18.0.0",
+    "@angular/core": "^17.0.0 || ^18.0.0",
     "@angular/platform-server": "^17.0.0 || ^18.0.0",
     "@angular/ssr": "^17.0.0 || ^18.0.0",
     "@nestjs/common": "^9.0.0 || ^10.0.0",
@@ -27,10 +27,10 @@
     "zone.js": "^0.14.0"
   },
   "devDependencies": {
-    "@angular/cli": "^18.0.0",
-    "@angular/common": "^18.0.0",
-    "@angular/platform-server": "^18.0.0",
-    "@angular/ssr": "^18.0.0",
+    "@angular/cli": "18.0.6",
+    "@angular/common": "18.0.6",
+    "@angular/platform-server": "18.0.6",
+    "@angular/ssr": "18.0.6",
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-angular": "17.7.0",
     "@nestjs/common": "^10.3.10",
@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "@angular-devkit/schematics": "18.0.7",
-    "@schematics/angular": "18.0.7"
+    "@schematics/angular": "18.0.7",
+    "domino": "^2.1.6"
   },
   "schematics": "./schematics/collection.json",
   "lint-staged": {
