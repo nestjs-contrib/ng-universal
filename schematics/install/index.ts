@@ -56,8 +56,8 @@ function addDependencies(options: UniversalOptions): Rule {
     });
     addPackageJsonDependency(host, {
       type: NodeDependencyType.Default,
-      name: '@nestjs/ng-universal',
-      version: '^8.0.0'
+      name: '@nestjs-contrib/ng-universal',
+      version: '^9.0.0'
     });
 
     updateWorkspace((workspace) => {
