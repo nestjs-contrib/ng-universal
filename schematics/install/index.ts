@@ -90,9 +90,7 @@ function addDependencies(options: UniversalOptions): Rule {
         ...externalDependencies,
         '@nestjs/core',
         '@nestjs/common',
-        '@nestjs/websockets',
-        '@nestjs/microservices',
-        '@nestjs/ng-universal',
+        '@nestjs-contrib/ng-universal',
         'domino'
       ];
     });
