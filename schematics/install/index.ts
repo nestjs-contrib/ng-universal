@@ -91,7 +91,13 @@ function addDependencies(options: UniversalOptions): Rule {
         '@nestjs/core',
         '@nestjs/common',
         '@nestjs-contrib/ng-universal',
-        'domino'
+        '@nestjs/microservices',
+        '@nestjs/microservices/microservices-module',
+        '@nestjs/websockets',
+        '@nestjs/websockets/socket-module',
+        'cache-manager',
+        'class-transformer',
+        'class-validator'
       ];
     });
   };
